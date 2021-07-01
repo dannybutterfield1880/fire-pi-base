@@ -1,0 +1,38 @@
+{
+  "name": "firepi-client",
+  "version": "1.0.0",
+  "description": "FirePi Client Side",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": ""
+  },
+  "author": "Danny Butterfield",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-transform-react-constant-elements": "^7.14.5",
+    "@babel/plugin-transform-react-inline-elements": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "@ionic/cli": "^6.16.3",
+    "@svgr/webpack": "^3.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "compression-webpack-plugin": "^8.0.0",
+    "concurrently": "^6.2.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "webpack": "^5.39.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^3.0.0"
+  }
+}

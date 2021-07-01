@@ -1,5 +1,6 @@
 const express = require("express")
 const functions = require("firebase-functions")
+const cors = require('cors');
 const { approvePayment, completePayment } = require("./services");
 const { completedHandler, approveHandler } = require("./handlers");
 const CURRENT_VERSION = 1;
@@ -9,7 +10,7 @@ const main = express();
 
 //add the path to receive request and set json as bodyParser to process the body 
 main.use(`/v${CURRENT_VERSION}`, app);
-main.use(express.cors())
+main.use(cors())
 main.use(express.json());
 main.use(express.urlencoded({ extended: false }));
 

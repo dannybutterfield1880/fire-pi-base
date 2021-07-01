@@ -1,0 +1,23 @@
+{
+  "name": "fire-pi",
+  "version": "1.0.0",
+  "description": "Boilerplate for creating Pi Network web apps running on the Firebase platform",
+  "main": "public/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannybutterfield1880/fire-pi-base.git"
+  },
+  "keywords": [
+    "firebase",
+    "pinetwork"
+  ],
+  "author": "Danny Butterfield",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dannybutterfield1880/fire-pi-base/issues"
+  },
+  "homepage": "https://github.com/dannybutterfield1880/fire-pi-base#readme"
+}

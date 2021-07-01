@@ -1,5 +1,5 @@
 /**
- * Here you can do things with the repsonse after the API calls
+ * Here you can do things with the repsonse after the API
  */
 
 

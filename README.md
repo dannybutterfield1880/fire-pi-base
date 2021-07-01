@@ -26,7 +26,11 @@ Go to your projects folder (I use C:\\Users\danny\Projects) and run:
 
 This will pull in the fire-pi boilerplate and put it in a directory called pi-app. You can now open this directory from your favourite code editor. I'll be using VS Code.
 
+Get your Pi Apps API Key
 
+Set pinetwork.apikey variable in firebase functions, this is to protect your api key. Only firebase functions will be able to access this variable.
+
+`firebase functions:config:set pinetwork.apikey="YOUR API KEY HERE"`
 
 
 

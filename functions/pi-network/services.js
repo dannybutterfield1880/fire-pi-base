@@ -1,13 +1,13 @@
 /**
  * Pi Network API services
  */
-
+const functions = require("firebase-functions");
 const { db } = require('../services/firebase')
 const axios = require("axios");
 const piNetworkApi = 'api.minepi.com/v2'
 const API_KEY = functions.config().pinetwork.apikey
 
-exports.approvePayment = async (paymentId, handlerFunction = () => console.log('Please implement callback function!'))) => {
+exports.approvePayment = async (paymentId, handlerFunction = () => console.log('Please implement callback function!')) => {
   console.log('trying to request approval')
 
   try {
@@ -40,7 +40,7 @@ exports.approvePayment = async (paymentId, handlerFunction = () => console.log('
   }
 }
 
-exports.completePayment = async (paymentId, callback = () => console.log('Please implement callback!')) => {
+exports.completePayment = async (paymentId, handlerFunction = () => console.log('Please implement callback!')) => {
     try {
         //send /approve POST request
         const response = await axios.post(`https://${piNetworkApi}/payments/${paymentId}/complete`, {}, {
@@ -49,7 +49,10 @@ exports.completePayment = async (paymentId, callback = () => console.log('Please
             }
         })
 
-        console.log('payment', paymentId, 'approved')
+        if (handlerFunction) {
+            handlerFunction(response.data)
+        }
+
         //return response;
         return res.status(200).send({
             message: 'Payment completed!',
