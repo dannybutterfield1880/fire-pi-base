@@ -11,16 +11,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.post('/payments/approve', async (req, res) => {
-  console.log('here in payments approve with body', req.body)
   const { paymentId } = req.body
 
-  console.log('approving payment', paymentId)
-
-  //call approvePayment passing in the requested paymentId and a callback to handle the response once it is returned from pi's servers
   const response = await approvePayment(paymentId, approveHandler)
 
   if (response) {
-    console.log(response)
+
+    //PaymentDTO
+    console.log('do something with paymentDTO', response)
+
+    //do something with PaymentDTO if you want
+
     return res.status(200).send({
       message: 'Payment approved!',
       status: 'success'

@@ -1,5 +1,7 @@
 import axios from './axios';
 
+const Pi = window.Pi;
+
 export const authenticatePiUser = async () => {
     // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
     const scopes = ['payments'];
@@ -30,10 +32,9 @@ export const onIncompletePaymentFound = (payment) => {
 }; // Read more about this in the SDK reference
 
 export const onReadyForApproval = async (paymentId) => {
-    console.log('trying to make request to server for approval with paymentId')
     //make POST request to your app server /payments/approve endpoint with paymentId in the body
     
-    const { body, status } = await axios.post('/payments/approve', {
+    const { data, status } = await axios.post('/payments/approve', {
         paymentId
     })
 
@@ -45,8 +46,7 @@ export const onReadyForApproval = async (paymentId) => {
 
     if (status === 200) {
         //payment was approved continue with flow
-        console.log(body)
-        return true;
+        return data;
     }
 }
 
