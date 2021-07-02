@@ -1,5 +1,11 @@
+/**
+ * This file is MIT however it does not require to be modified
+ * 
+ * @author dannybutterfield1880.github.io
+ * @license MIT
+ */
+
 const express = require("express")
-const { db } = require('../services/firebase')
 const cors = require('cors')
 const functions = require("firebase-functions")
 const axios = require("axios")
@@ -11,7 +17,6 @@ const API_KEY = functions.config().pinetwork.apikey
 const app = express();
 const main = express();
 
-//add the path to receive request and set json as bodyParser to process the body 
 main.use(`/v${CURRENT_VERSION}`, app);
 main.use(cors())
 main.use(express.json());
@@ -24,12 +29,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.post('/payments/approve', async (req, res) => {
   //retrieve paymentId from POST request body
   const { paymentId } = req.body
-
-  console.log('trying to request approval')
 
   try {
     //send /approve POST request
@@ -39,8 +41,6 @@ app.post('/payments/approve', async (req, res) => {
       }
     })
 
-
-    //return response;
     return res.status(200).send({
       message: 'Payment approved!',
       status: 'success'
@@ -55,61 +55,10 @@ app.post('/payments/approve', async (req, res) => {
       status: 'error'
     })
   }
-  
-  
-  // await request(requestConfig, function (error, response) {
-
-  //   //there was an error don't continue with payment process
-  //   if (error) {
-
-      
-  //   }
-    
-  //   console.log('response.body', response.body);
-
-  //   /**
-  //    * console.log(response.body) will output PaymentDTO object
-  //    * do something with this data maybe store in a payments table for your own reference
-  //    * 
-  //    * PaymentDTO
-  //     {
-  //       // Payment data:
-  //       "identifier": string, // The payment identifier
-  //       "user_uid": string, // The user's app-specific ID
-  //       "amount": number, // The payment amount
-  //       "memo": string, // A string provided by the developer, shown to the user
-  //       "metadata": Object, // An object provided by the developer for their own usage
-  //       "to_address": string, // The recipient address of the blockchain transaction
-  //       "created_at": string, // The payment's creation timestamp
-        
-  //       // Status flags representing the current state of this payment
-  //       "status": {
-  //         "developer_approved": boolean, // Server-Side Approval
-  //         "transaction_verified": boolean, // Blockchain transaction verified
-  //         "developer_completed": boolean, // Server-Side Completion
-  //         "cancelled": boolean, // Cancelled by the developer or by Pi Network
-  //         "user_cancelled": boolean, // Cancelled by the user
-  //       },
-        
-  //       // Blockchain transaction data:
-  //       "transaction": null | { // This is null if no transaction has been made yet
-  //         "txid": string, // The id of the blockchain transaction
-  //         "verified": boolean, // True if the transaction matches the payment, false otherwise
-  //         "_link": string, // A link to the operation on the Blockchain API
-  //       },
-  //     };
-  //    */
-
-  
-    
-  // });
 })
-
+  
 app.post('/payments/complete', async (req, res) => {
   const { paymentId, txid } = req.body
-
-  console.log('completing payment,', paymentId, 'with txid', txid)
-  //set up /complete POST request
   try {
     //send /approve POST request
     await axios.post(`https://${piNetworkApi}/payments/${paymentId}/complete`, {
@@ -120,9 +69,6 @@ app.post('/payments/complete', async (req, res) => {
       }
     })
 
-
-    console.log('payment', paymentId, 'approved')
-    //return response;
     return res.status(200).send({
       message: 'Payment completed!',
       status: 'success'
@@ -139,5 +85,4 @@ app.post('/payments/complete', async (req, res) => {
   }
 })
 
-//define google cloud function name
 module.exports = functions.https.onRequest(main);
