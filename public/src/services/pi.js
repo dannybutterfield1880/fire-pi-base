@@ -76,3 +76,7 @@ export const onCancel = (paymentId) => {
 export const onError = (error, paymentId) => { 
     console.log('onError', error, paymentId) 
 }
+
+export const openPiShareDialog = (title, message) => {
+    Pi.openShareDialog(title, message)
+}
