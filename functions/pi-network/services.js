@@ -7,16 +7,14 @@ const axios = require("axios");
 const piNetworkApi = 'api.minepi.com/v2'
 const API_KEY = functions.config().pinetwork.apikey
 
-const piAxios = axios.create({
-  baseURL: `https://${piNetworkApi}/payments`
-})
+
 
 exports.approvePayment = async (paymentId, handlerFunction = () => console.log('Please implement callback function!')) => {
   console.log('trying to request approval')
 
   try {
     //send /approve POST request
-    await piAxios.post(`/${paymentId}/approve`, {}, {
+    await axios.post(`https://${piNetworkApi}/payments/${paymentId}/approve`, {}, {
       headers: {
         'Authorization': `Key ${API_KEY}`
       }

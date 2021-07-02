@@ -6,23 +6,12 @@ const { completedHandler, approveHandler } = require("./handlers");
 const CURRENT_VERSION = 1;
 
 const app = express();
-// //add the path to receive request and set json as bodyParser to process the body 
-// app.use(`/v${CURRENT_VERSION}`, app);
 app.use(cors({ origin: '*' }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(function(req, res, next) {
-//   console.log('I am here!')
-//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-//   //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Max-Age", "600")
-//   console.log(res.getHeaders())
-//   next();
-// });
-
 app.post('/payments/approve', async (req, res) => {
-  console.log('here in payments approve')
+  console.log('here in payments approve with body', req.body)
   const { paymentId } = req.body
 
   console.log('approving payment', paymentId)

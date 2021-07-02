@@ -30,7 +30,7 @@ export const onIncompletePaymentFound = (payment) => {
 }; // Read more about this in the SDK reference
 
 export const onReadyForApproval = async (paymentId) => {
-    console.log('trying to make request to server for approval')
+    console.log('trying to make request to server for approval with paymentId')
     //make POST request to your app server /payments/approve endpoint with paymentId in the body
     
     const { body, status } = await axios.post('/payments/approve', {
