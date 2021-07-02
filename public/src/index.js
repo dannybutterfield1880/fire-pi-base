@@ -2,6 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { render } from 'react-dom'
 import axios from './services/axios'
 import { createPiPayment, authenticatePiUser } from './services/pi';
+
+//import './utils/pi-mock';
+
+// window.PiMockConfig = {
+//     username: 'john_doe',
+//     uid: '12345678-1234-414e-b578-42e89d1f3c02',
+//     payment_found: {
+//         amount: 1, // Amount of π to be paid
+//         memo: "Please pay for your order #12345", // User-facing explanation of the payment
+//         metadata: {orderId: 12345}, // Developer-facing metadata
+//     },
+//     payment_error: false,
+//     payment_cancelled: false,
+// }
+
 const Pi = window.Pi;
 
 const App = () => {

@@ -4,7 +4,6 @@ import 'firebase/analytics'
 import 'firebase/storage'
 import 'firebase/messaging'
 import firebaseConfig from './firebaseConfig';
-import { v4 as uuidv4 } from 'uuid';
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();

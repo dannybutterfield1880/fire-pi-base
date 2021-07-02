@@ -6,10 +6,9 @@ export const authenticatePiUser = async () => {
     
     try{
         const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-        // console.log(`Hi there! You're ready to make payments!`);
-        // console.log('auth: ', auth);
+        console.log(`Hi there! You're ready to make payments!`);
+        console.log('auth: ', auth);
 
-        await createPiPayment();
     } catch(err) {
         console.log(err)
     }

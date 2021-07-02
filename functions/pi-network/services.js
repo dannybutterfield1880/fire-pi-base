@@ -7,36 +7,36 @@ const axios = require("axios");
 const piNetworkApi = 'api.minepi.com/v2'
 const API_KEY = functions.config().pinetwork.apikey
 
+const piAxios = axios.create({
+  baseURL: `https://${piNetworkApi}/payments`
+})
+
 exports.approvePayment = async (paymentId, handlerFunction = () => console.log('Please implement callback function!')) => {
   console.log('trying to request approval')
 
   try {
     //send /approve POST request
-    const response = await axios.post(`https://${piNetworkApi}/payments/${paymentId}/approve`, {}, {
+    await piAxios.post(`/${paymentId}/approve`, {}, {
       headers: {
         'Authorization': `Key ${API_KEY}`
       }
     })
+
+    console.log('response', response)
 
     if (handlerFunction) {
         handlerFunction(response.data)
     }
 
     //return response;
-    return res.status(200).send({
-      message: 'Payment approved!',
-      status: 'success'
-    });
+    return true;
 
   } catch (err) {
     //output error for debugging
     console.log('error:', err)
       
     //return something to your front end
-    return res.status(500).send({
-      message: `There has been an error!`,
-      status: 'error'
-    })
+    return false
   }
 }
 
@@ -54,18 +54,12 @@ exports.completePayment = async (paymentId, handlerFunction = () => console.log(
         }
 
         //return response;
-        return res.status(200).send({
-            message: 'Payment completed!',
-            status: 'success'
-        });
+        return true
     } catch (err) {
         //output error for debugging
         console.log(err)
             
         //return something to your front end
-        return res.status(500).send({
-            message: `There has been an error!`,
-            status: 'error'
-        })
+        return false
     }
 }
