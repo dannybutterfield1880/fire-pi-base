@@ -7,10 +7,7 @@ export const authenticatePiUser = async () => {
     const scopes = ['payments'];
     
     try{
-        const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-        console.log(`Hi there! You're ready to make payments!`);
-        console.log('auth: ', auth);
-
+        return await Pi.authenticate(scopes, onIncompletePaymentFound);
     } catch(err) {
         console.log(err)
     }
@@ -19,7 +16,7 @@ export const authenticatePiUser = async () => {
 export const createPiPayment = async (config) => {
     Pi.createPayment(config, {
         // Callbacks you need to implement - read more about those in the detailed docs linked below:
-        onReadyForServerApproval: onReadyForApproval,
+        onReadyForServerApproval: (paymentId) => onReadyForApproval(paymentId, config),
         onReadyForServerCompletion: onReadyForCompletion,
         onCancel,
         onError,
@@ -31,11 +28,12 @@ export const onIncompletePaymentFound = (payment) => {
     console.log('incomplete payment found: ', payment) 
 }; // Read more about this in the SDK reference
 
-export const onReadyForApproval = async (paymentId) => {
+export const onReadyForApproval = async (paymentId, paymentConfig) => {
     //make POST request to your app server /payments/approve endpoint with paymentId in the body
     
     const { data, status } = await axios.post('/payments/approve', {
-        paymentId
+        paymentId,
+        paymentConfig
     })
 
     if (status === 500) {

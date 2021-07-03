@@ -4,7 +4,10 @@
   "description": "Boilerplate for creating Pi Network web apps running on the Firebase platform",
   "main": "public/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd public && webpack serve --mode=development",
+    "build": "cd public && webpack --mode=production",
+    "deploy": "cd public && webpack --mode=production && cd ../ && firebase deploy"
   },
   "repository": {
     "type": "git",
